@@ -97,7 +97,7 @@ while True:
         xl2 = xl1
         xl1 = xl0
         
-        print(xn)
+        print(yl0, yn, adcVal)
         state = False
 
         
