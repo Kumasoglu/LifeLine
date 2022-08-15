@@ -101,6 +101,6 @@ while True:
         xl2 = xl1
         xl1 = xl0
         
-        print(3)
+        print(4)
         state = False
 
