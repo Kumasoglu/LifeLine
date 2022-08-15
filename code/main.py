@@ -101,6 +101,6 @@ while True:
         xl2 = xl1
         xl1 = xl0
         
-        print(adcVal)
+        print(adcVal, yl0)
         state = False
 
