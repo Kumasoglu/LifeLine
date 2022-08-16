@@ -20,25 +20,18 @@ def connect_wlan(ssid, password):
             pass
 
     return True
-
-def main():
     
-    gc.collect()
-    gc.enable()
 
-    SSID = "Test"
-    PASSWORD = "Hamdibeyiarayalim1"
+SSID = "Test"
+PASSWORD = "Hamdibeyiarayalim1"
 
-    connect_wlan(SSID, PASSWORD)
+connect_wlan(SSID, PASSWORD)
     
-    OTA = senko.Senko(user="Kumasoglu", repo="LifeLine", branch = "main", working_dir="code", files=["main.py"])
+OTA = senko.Senko(user="Kumasoglu", repo="LifeLine", branch = "main", working_dir="code", files=["main.py"])
 
-    if OTA.update():
-        print("Updated to the latest version! Rebooting...")
-        time.sleep(5)
-        machine.reset()
+if OTA.update():
+    print("Updated to the latest version! Rebooting...")
+    time.sleep(5)
+    machine.reset()
 
-
-if __name__ == "__main__":
-    main()
 
