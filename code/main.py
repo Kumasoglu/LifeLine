@@ -77,7 +77,7 @@ timer_0.init(period = Sampling_Frequency, mode = Timer.PERIODIC, callback = isr)
 
 while True:
     
-    if((leads_off_plus == 1 || leads_off_minus == 1)):
+    if Pin.value(leads_off_plus) == Pin.IN or Pin.value(leads_off_minus) == Pin.IN:
         
         print("leads off")
         
