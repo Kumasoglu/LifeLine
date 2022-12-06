@@ -12,9 +12,10 @@ instance1 = 0
 timer = 0
 count = 0
 flag = 0
-threshold = 1000
+threshold = 800
 hr = 72
 hrv = 0
+interval = 0
 
 micropython.alloc_emergency_exception_buf(100)
 
@@ -24,13 +25,14 @@ timer_0 = Timer(0)
 p34 = Pin(34, Pin.IN)
 adc = ADC(p34)
 
-leads_off_plus = Pin(16)
-leads_off_minus = Pin(5)
+leads_off_plus = Pin(16, Pin.IN)
+leads_off_minus = Pin(5, Pin.IN)
 
 
 adc.atten(ADC.ATTN_11DB) # 0 - 3.3V sampling
 adc.width(ADC.WIDTH_12BIT)
 
+global adc
 
 
 xn1 = 0
@@ -122,18 +124,18 @@ while True:
             xl2 = xl1
             xl1 = xl0
         
-            if y10 > threshold && (!flag):
+            if yl0 > threshold and flag == 0:
                 
                 count += 1
                 flag = 1
                 interval = time.ticks_diff(time.ticks_us(), instance1)
                 instance1= time.ticks_us()
             
-            elif y10 < threshold:
+            elif yl0 < threshold:
                 
                 flag = 0
             
-            if tiime.ticks_diff(time.ticks_ms() - timer) > 10000:
+            if time.ticks_diff(time.ticks_ms(), timer) > 10000:
                 
                 hr = count*6
                 timer = time.ticks_ms()
@@ -141,13 +143,7 @@ while True:
             
             hrv = hr/60 - interval/1000000
             
-            print(hr, hrv, y10)
+            print(yl0, hr)
             
             state = False
     
-        
-        
-
-        
-
-
