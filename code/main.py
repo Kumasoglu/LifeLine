@@ -25,9 +25,6 @@ timer_0 = Timer(0)
 p34 = Pin(34, Pin.IN)
 adc = ADC(p34)
 
-leads_off_plus = Pin(16, Pin.IN)
-leads_off_minus = Pin(5, Pin.IN)
-
 
 adc.atten(ADC.ATTN_11DB) # 0 - 3.3V sampling
 adc.width(ADC.WIDTH_12BIT)
@@ -62,8 +59,6 @@ xl7 = 0
 
 
 
-
-
 def isr(timer):
     
     global state
@@ -73,8 +68,6 @@ def isr(timer):
     state = True
 
 timer_0.init(period = Sampling_Frequency, mode = Timer.PERIODIC, callback = isr)
-
-
 
 
 while True:
