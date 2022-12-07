@@ -79,16 +79,7 @@ timer_0.init(period = Sampling_Frequency, mode = Timer.PERIODIC, callback = isr)
 
 while True:
     
-    if Pin.value(leads_off_plus) == Pin.IN or Pin.value(leads_off_minus) == Pin.IN:
-        
-        print("leads off")
-        
-        instance1 = time.ticks_us()
-        timer = time.ticks_ms()
-    
-    else:
-        
-        if(state):
+    if(state):
             start = time.ticks_us()
             xn = adcVal
         
@@ -146,4 +137,6 @@ while True:
             print(yl0, hr)
             
             state = False
+        
     
+
