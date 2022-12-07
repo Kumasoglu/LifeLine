@@ -125,7 +125,6 @@ while True:
                 timer = time.ticks_ms()
                 count = 0;
             
-            hrv = hr/60 - interval/1000000
             
             print(yl0, hr)
             
