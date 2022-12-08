@@ -25,11 +25,8 @@ timer_0 = Timer(0)
 p34 = Pin(34, Pin.IN)
 adc = ADC(p34)
 
-
 adc.atten(ADC.ATTN_11DB) # 0 - 3.3V sampling
 adc.width(ADC.WIDTH_12BIT)
-
-global adc
 
 
 xn1 = 0
@@ -73,7 +70,7 @@ timer_0.init(period = Sampling_Frequency, mode = Timer.PERIODIC, callback = isr)
 while True:
     
     if(state):
-            start = time.ticks_us()
+        
             xn = adcVal
         
             yn = xn - 3*xn1 + 3 * xn2 - 1 * xn3
