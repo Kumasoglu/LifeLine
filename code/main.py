@@ -119,9 +119,9 @@ while True:
                 
                 flag = 0
             
-            if time.ticks_diff(time.ticks_ms(), timer) > 5000:
+            if time.ticks_diff(time.ticks_ms(), timer) > 2500:
                 
-                hr = count*12
+                hr = count*24
                 timer = time.ticks_ms()
                 count = 0;
             
