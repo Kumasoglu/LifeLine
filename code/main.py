@@ -12,8 +12,8 @@ instance1 = 0
 timer = 0
 count = 0
 flag = 0
-threshold = 800
-hr = 72
+threshold = 1000
+hr = 86
 hrv = 0
 interval = 0
 
