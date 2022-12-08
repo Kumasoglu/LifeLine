@@ -107,26 +107,9 @@ while True:
             xl3 = xl2
             xl2 = xl1
             xl1 = xl0
-        
-            if yl0 > threshold and flag == 0:
-                
-                count += 1
-                flag = 1
-                interval = time.ticks_diff(time.ticks_us(), instance1)
-                instance1= time.ticks_us()
+       
             
-            elif yl0 < threshold:
-                
-                flag = 0
-            
-            if time.ticks_diff(time.ticks_ms(), timer) > 2500:
-                
-                hr = count*24
-                timer = time.ticks_ms()
-                count = 0;
-            
-            
-            print(yl0, hr)
+            print(yl0)
             
             state = False
         
