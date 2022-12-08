@@ -12,7 +12,7 @@ instance1 = 0
 timer = 0
 count = 0
 flag = 0
-threshold = 800
+threshold = 700
 hr = 72
 hrv = 0
 interval = 0
@@ -24,9 +24,6 @@ timer_0 = Timer(0)
 
 p34 = Pin(34, Pin.IN)
 adc = ADC(p34)
-
-leads_off_plus = Pin(16, Pin.IN)
-leads_off_minus = Pin(5, Pin.IN)
 
 
 adc.atten(ADC.ATTN_11DB) # 0 - 3.3V sampling
@@ -62,8 +59,6 @@ xl7 = 0
 
 
 
-
-
 def isr(timer):
     
     global state
@@ -75,20 +70,9 @@ def isr(timer):
 timer_0.init(period = Sampling_Frequency, mode = Timer.PERIODIC, callback = isr)
 
 
-
-
 while True:
     
-    if Pin.value(leads_off_plus) == Pin.IN or Pin.value(leads_off_minus) == Pin.IN:
-        
-        print("leads off")
-        
-        instance1 = time.ticks_us()
-        timer = time.ticks_ms()
-    
-    else:
-        
-        if(state):
+    if(state):
             start = time.ticks_us()
             xn = adcVal
         
@@ -123,27 +107,26 @@ while True:
             xl3 = xl2
             xl2 = xl1
             xl1 = xl0
-        
+            
             if yl0 > threshold and flag == 0:
                 
                 count += 1
                 flag = 1
                 interval = time.ticks_diff(time.ticks_us(), instance1)
                 instance1= time.ticks_us()
-            
+                
             elif yl0 < threshold:
                 
                 flag = 0
             
-            if time.ticks_diff(time.ticks_ms(), timer) > 10000:
+            if time.ticks_diff(time.ticks_ms(), timer) > 3200:
                 
-                hr = count*6
+                hr = count*15
                 timer = time.ticks_ms()
                 count = 0;
-            
-            hrv = hr/60 - interval/1000000
+       
             
             print(yl0, hr)
             
             state = False
-    
+        
