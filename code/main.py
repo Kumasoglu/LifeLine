@@ -126,7 +126,7 @@ while True:
                 count = 0;
        
             
-            print(yl0, hr)
+            print(yl0, xn, hr)
             
             state = False
         
