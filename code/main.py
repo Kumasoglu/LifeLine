@@ -12,8 +12,8 @@ instance1 = 0
 timer = 0
 count = 0
 flag = 0
-threshold = 859
-hr = 86
+threshold = 800
+hr = 72
 hrv = 0
 interval = 0
 
@@ -119,9 +119,9 @@ while True:
                 
                 flag = 0
             
-            if time.ticks_diff(time.ticks_ms(), timer) > 2500:
+            if time.ticks_diff(time.ticks_ms(), timer) > 5000:
                 
-                hr = count*24
+                hr = count*12
                 timer = time.ticks_ms()
                 count = 0;
        
