@@ -12,7 +12,7 @@ gc.collect()
 gc.enable()
 
 # Connecting to Wi-Fi
-wifi = WiFiConnection('TurkTelekom_T75B1', '4pssxmGT')
+wifi = WiFiConnection('osman', 'gevtbt0651')
 
 if wifi.connect():
     
