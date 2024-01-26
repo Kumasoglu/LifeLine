@@ -1,6 +1,7 @@
 import network
 import urequests
 import time
+import gc
 
 class WiFiConnection:
     def __init__(self, ssid, password, attempts=2, timeout=10):
@@ -37,14 +38,23 @@ class OTAUpdater:
         self.base_url = base_url
         self.file_list = file_list
 
+    def update_file(self, url, dest):
+        try:
+            response = urequests.get(url, stream=True)
+            if response.status_code == 200:
+                with open(dest, 'w') as f:
+                    for chunk in response.iter_content(1024):  # Read in chunks of 1KB
+                        f.write(chunk)
+                response.close()
+                print(f"Updated {dest}")
+            else:
+                print(f"Failed to download {url}")
+        except Exception as e:
+            print(f"Error updating {dest}: {e}")
+        gc.collect()  # Trigger garbage collection after updating each file
+
     def update(self):
         for file in self.file_list:
             url = f"{self.base_url}/{file}"
-            response = urequests.get(url)
-            if response.status_code == 200:
-                with open(file, 'w') as f:
-                    f.write(response.text)
-                print(f"Updated {file}")
-            else:
-                print(f"Failed to download {file}")
+            self.update_file(url, file)
         print("All updates complete.")
