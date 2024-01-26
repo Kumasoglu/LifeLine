@@ -31,7 +31,7 @@ class WiFiConnection:
         print("Failed to connect to Wi-Fi after multiple attempts")
         return False
 
-class FolderOTAUpdater:
+class OTAUpdater:
     def __init__(self, base_url, file_list):
         self.base_url = base_url
         self.file_list = file_list
