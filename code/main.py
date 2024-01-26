@@ -13,7 +13,7 @@ wifi = WiFiConnection('TurkTelekom_T75B1', '4pssxmGT')
 if wifi.connect():
     base_url = "https://github.com/Kumasoglu/LifeLine/tree/main/code"
     file_list = ["boot.py","main.py", "circullarBuffer.py", "ecg_filters.py", "heartRate.py", "wi_fi.py", "backup.py"]  # List all files in the folder
-    ota = OTAUpdater(base_url, files_to_update)
+    ota = OTAUpdater(base_url, file_list)
     ota.update()
 else:
     print("Proceeding without Wi-Fi connection.")
