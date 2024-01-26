@@ -2,7 +2,7 @@ from machine import Timer, Pin, ADC, SoftI2C
 import time
 import time
 from wi_fi import WiFiConnection, OTAUpdater  
-from circullarBuffer import CircullarBuffer
+from circullarBuffer import CircularBuffer
 from ecg_filters import Filter
 from heartRate import BPMMonitor
 from accel import ADXL345
