@@ -9,15 +9,15 @@ from accel import ADXL345
 
 # Connecting to Wi-Fi
 wifi = WiFiConnection('yourSSID', 'yourPassword')
-wifi.connect()
 
-files_to_update = [
-    {"url": "https://raw.githubusercontent.com/yourUsername/yourRepo/master/main.py", "dest": "main.py"},
-    # Add other files if necessary
-]
-ota = OTAUpdater(files_to_update)
-ota.update()
-
+if wifi.connect():
+    base_url = "https://github.com/Kumasoglu/LifeLine/tree/main/code"
+    file_list = ["boot.py","main.py", "circullarBuffer.py", "ecg_filters.py", "heartRate.py", "wi_fi.py", "backup.py"]  # List all files in the folder
+    ota = OTAUpdater(base_url, files_to_update)
+    ota.update()
+else:
+    print("Proceeding without Wi-Fi connection.")
+    
 # Give power to ADXL345 Sensor
 aclPowerPin = Pin(4, Pin.OUT)
 aclPowerPin.value(1)
