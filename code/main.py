@@ -8,7 +8,7 @@ from heartRate import BPMMonitor
 from accel import ADXL345
 
 # Connecting to Wi-Fi
-wifi = WiFiConnection('yourSSID', 'yourPassword')
+wifi = WiFiConnection('TurkTelekom_T75B1', '4pssxmGT')
 
 if wifi.connect():
     base_url = "https://github.com/Kumasoglu/LifeLine/tree/main/code"
