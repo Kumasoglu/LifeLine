@@ -40,10 +40,11 @@ class OTAUpdater:
 
     def update_file(self, url, dest):
         try:
-            response = urequests.get(url)
+            response = urequests.get(url, stream=True)
             if response.status_code == 200:
                 with open(dest, 'w') as f:
-                    f.write(response.text)
+                    for chunk in response.iter_content(1024):  # Read in chunks of 1KB
+                        f.write(chunk)
                 response.close()
                 print(f"Updated {dest}")
             else:
