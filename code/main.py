@@ -1,4 +1,4 @@
-from machine import Timer, Pin, ADC, SoftI2C
+from machine import Timer, Pin, ADC, SoftI2C, reset
 import time
 from wi_fi import WiFiConnection, Senko  
 from circullarBuffer import CircularBuffer
@@ -22,7 +22,7 @@ if wifi.connect():
         print("Updates available. Updating...")
         if ota.update():
             print("Update successful! Rebooting...")
-            machine.reset()
+            reset()
     else:
         print("No updates available.")
 else:
