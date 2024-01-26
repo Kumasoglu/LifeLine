@@ -16,7 +16,7 @@ wifi = WiFiConnection('TurkTelekom_T75B1', '4pssxmGT')
 
 if wifi.connect():
     
-    ota = Senko(user="Kumasoglu", repo="LifeLine", working_dir="examples", files=["boot.py", "main.py", "circullarBuffer.py", "ecg_filters.py", "heartRate.py", "wi_fi.py", "backup.py"])
+    ota = Senko(user="Kumasoglu", repo="LifeLine", working_dir="code", files=["boot.py", "main.py", "circullarBuffer.py", "ecg_filters.py", "heartRate.py", "wi_fi.py", "backup.py"])
     
     if ota.fetch():
         print("Updates available. Updating...")
