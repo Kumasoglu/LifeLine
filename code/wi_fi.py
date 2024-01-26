@@ -1,5 +1,6 @@
 import network
 import urequests
+import time
 
 class WiFiConnection:
     def __init__(self, ssid, password, attempts=2, timeout=10):
