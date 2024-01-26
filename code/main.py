@@ -22,12 +22,14 @@ if wifi.connect():
         print("Updates available. Updating...")
         if ota.update():
             print("Update successful! Rebooting...")
+            time.sleep(10)
             reset()
     else:
         print("No updates available.")
+        time.sleep(10)
 else:
     print("Proceeding without Wi-Fi connection. No updates made")
-    time.sleep(2)
+    time.sleep(10)
 
 
 # Give power to ADXL345 Sensor
