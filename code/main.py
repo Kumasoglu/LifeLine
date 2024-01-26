@@ -1,23 +1,35 @@
 from machine import Timer, Pin, ADC, SoftI2C
 import time
-import time
-from wi_fi import WiFiConnection, OTAUpdater  
+from wi_fi import WiFiConnection, Senko  
 from circullarBuffer import CircularBuffer
 from ecg_filters import Filter
 from heartRate import BPMMonitor
 from accel import ADXL345
+import gc
+
+# Garbage Collection
+gc.collect()
+gc.enable()
 
 # Connecting to Wi-Fi
 wifi = WiFiConnection('TurkTelekom_T75B1', '4pssxmGT')
 
 if wifi.connect():
-    base_url = "https://github.com/Kumasoglu/LifeLine/tree/main/code"
-    file_list = ["boot.py","main.py", "circullarBuffer.py", "ecg_filters.py", "heartRate.py", "wi_fi.py", "backup.py"]  # List all files in the folder
-    ota = OTAUpdater(base_url, file_list)
-    ota.update()
-else:
-    print("Proceeding without Wi-Fi connection.")
     
+    ota = Senko(user="Kumasoglu", repo="LifeLine", working_dir="examples", files=["boot.py", "main.py", "circullarBuffer.py", "ecg_filters.py", "heartRate.py", "wi_fi.py", "backup.py"])
+    
+    if ota.fetch():
+        print("Updates available. Updating...")
+        if ota.update():
+            print("Update successful! Rebooting...")
+            machine.reset()
+    else:
+        print("No updates available.")
+else:
+    print("Proceeding without Wi-Fi connection. No updates made")
+    time.sleep(2)
+
+
 # Give power to ADXL345 Sensor
 aclPowerPin = Pin(4, Pin.OUT)
 aclPowerPin.value(1)
@@ -43,7 +55,7 @@ Sampling_Period = 5  # Sampling Frequency = 200 Hz
 buffer_size = 200  # Buffer takes 1.25 seconds to fill
 adc_data = CircularBuffer(buffer_size)
 
-# They are also good (3rd Order and 4th Order) (Main)
+# (3rd Order and 4th Order)
 b_lp = [0.04658291, 0.18633163, 0.27949744, 0.18633163, 0.04658291]
 a_lp = [1.0, -0.7820952, 0.67997853, -0.1826757, 0.03011888]
 
@@ -101,5 +113,6 @@ try:
 
 except KeyboardInterrupt:
     ecg_timer.deinit()  # Stop the timer to prevent further interrupts
+
 
 
