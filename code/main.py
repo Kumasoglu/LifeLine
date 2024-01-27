@@ -110,7 +110,7 @@ try:
                 bpm = bpm_monitor.update(filtered_ecg_value)
                 if bpm is not None:
                     last_bpm = bpm  # Update the BPM only if a new value is calculated
-            print(filtered_ecg_value, raw_ecg_value, bpm, y)
+            print(bpm)
 
 except KeyboardInterrupt:
     ecg_timer.deinit()  # Stop the timer to prevent further interrupts
