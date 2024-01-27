@@ -103,15 +103,14 @@ try:
         while not adc_data.is_empty():
             raw_ecg_value = adc_data.dequeue()
             filtered_ecg_value = process_ecg_data(raw_ecg_value)
-            # current_time_ms = time.ticks_ms()
-            # y = accel.read_y()
-            
-            # if last_processed_time_ms is None or time.ticks_diff(current_time_ms, last_processed_time_ms) >= 5:
-            #    last_processed_time_ms = current_time_ms
-            #    bpm = bpm_monitor.update(filtered_ecg_value)
-            #    if bpm is not None:
-            # last_bpm = bpm  # Update the BPM only if a new value is calculated
-            print(filtered_ecg_value, raw_ecg_value)
+            current_time_ms = time.ticks_ms()
+            y = accel.read_y()
+            if last_processed_time_ms is None or time.ticks_diff(current_time_ms, last_processed_time_ms) >= 5:
+                last_processed_time_ms = current_time_ms
+                bpm = bpm_monitor.update(filtered_ecg_value)
+                if bpm is not None:
+                    last_bpm = bpm  # Update the BPM only if a new value is calculated
+            print(filtered_ecg_value, raw_ecg_value, last_bpm, y)
 
 except KeyboardInterrupt:
     ecg_timer.deinit()  # Stop the timer to prevent further interrupts
