@@ -5,7 +5,7 @@ class BPMMonitor:
         self.sample_rate = sample_rate
         self.threshold = threshold
         self.signal_window = []  # Stores the last 5 ECG values
-        self.sample_window = 3
+        self.sample_window = 5
         self.last_peak_time = None
         self.r_peak_intervals = []  # Stores intervals between R-peaks
 
@@ -29,7 +29,7 @@ class BPMMonitor:
                 self.last_peak_time = current_time
 
         # Calculate average BPM from the last 8 R-peak intervals
-        if len(self.r_peak_intervals) == 5:
+        if len(self.r_peak_intervals) == 8:
             avg_bpm = self.calculate_average_bpm()
             self.r_peak_intervals = []  # Reset for the next set of 8 R-peaks
             return avg_bpm
